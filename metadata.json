@@ -1,0 +1,6 @@
+{
+  "name": "BusGo",
+  "description": "A modern, responsive bus ticket booking platform featuring real-time seat selection, digital QR boarding tickets, live journey tracking, AI travel assistant, and admin fleet management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

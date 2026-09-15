@@ -1,0 +1,106 @@
+{
+  "entities": {
+    "users": {
+      "title": "User",
+      "description": "Registered passenger and admin profiles",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Unique user ID" },
+        "email": { "type": "string", "description": "User email address" },
+        "displayName": { "type": "string", "description": "Full name" },
+        "phoneNumber": { "type": "string", "description": "Contact phone number" },
+        "photoURL": { "type": "string", "description": "Avatar image URL" },
+        "role": { "type": "string", "enum": ["user", "admin"], "description": "User access role" },
+        "savedLocations": { "type": "array", "description": "Frequently used addresses" }
+      },
+      "required": ["uid", "email", "displayName", "role"]
+    },
+    "buses": {
+      "title": "Bus",
+      "description": "Bus fleet details, pricing, operator, and seat matrices",
+      "type": "object",
+      "properties": {
+        "busId": { "type": "string", "description": "Unique bus identifier" },
+        "operatorName": { "type": "string", "description": "Name of travel operator" },
+        "busNumber": { "type": "string", "description": "Vehicle registration number" },
+        "busType": { "type": "string", "description": "Vehicle model and classification" },
+        "source": { "type": "string", "description": "Origin city" },
+        "destination": { "type": "string", "description": "Destination city" },
+        "departureTime": { "type": "string", "description": "Departure time HH:MM" },
+        "arrivalTime": { "type": "string", "description": "Arrival time HH:MM" },
+        "price": { "type": "number", "description": "Base ticket price in INR" },
+        "totalSeats": { "type": "number", "description": "Total seat capacity" },
+        "availableSeats": { "type": "number", "description": "Available seat count" },
+        "rating": { "type": "number", "description": "Average user rating" },
+        "amenities": { "type": "array", "description": "Onboard facilities" },
+        "boardingPoints": { "type": "array", "description": "Designated pick-up spots" },
+        "droppingPoints": { "type": "array", "description": "Designated drop-off spots" },
+        "routeStops": { "type": "array", "description": "Ordered route itinerary" }
+      },
+      "required": ["busId", "operatorName", "busNumber", "busType", "source", "destination", "departureTime", "arrivalTime", "price", "totalSeats"]
+    },
+    "routes": {
+      "title": "Route",
+      "description": "Intercity transit routes and distance telemetry",
+      "type": "object",
+      "properties": {
+        "routeId": { "type": "string", "description": "Unique route ID" },
+        "sourceCity": { "type": "string", "description": "Departure city" },
+        "destinationCity": { "type": "string", "description": "Arrival city" },
+        "distanceKm": { "type": "number", "description": "Total route distance" },
+        "averageDuration": { "type": "string", "description": "Standard duration" }
+      },
+      "required": ["routeId", "sourceCity", "destinationCity", "distanceKm"]
+    },
+    "locations": {
+      "title": "Location",
+      "description": "Recognized cities, terminals, and GPS coordinates",
+      "type": "object",
+      "properties": {
+        "locationId": { "type": "string", "description": "Unique location key" },
+        "city": { "type": "string", "description": "City name" },
+        "state": { "type": "string", "description": "State name" },
+        "latitude": { "type": "number", "description": "GPS latitude" },
+        "longitude": { "type": "number", "description": "GPS longitude" },
+        "busStandName": { "type": "string", "description": "Main terminal name" },
+        "popularBoardingPoints": { "type": "array", "description": "Recognized pick-up landmarks" }
+      },
+      "required": ["locationId", "city", "state", "latitude", "longitude", "busStandName"]
+    },
+    "bookings": {
+      "title": "Booking",
+      "description": "Passenger ticket reservations and lifecycle statuses",
+      "type": "object",
+      "properties": {
+        "bookingId": { "type": "string", "description": "Alphanumeric reservation code" },
+        "userId": { "type": "string", "description": "Owner user UID" },
+        "busId": { "type": "string", "description": "Reserved bus ID" },
+        "source": { "type": "string", "description": "Journey origin" },
+        "destination": { "type": "string", "description": "Journey destination" },
+        "journeyDate": { "type": "string", "description": "Date of journey YYYY-MM-DD" },
+        "seats": { "type": "array", "description": "List of booked seat numbers" },
+        "passengers": { "type": "array", "description": "Passenger profile list" },
+        "totalAmount": { "type": "number", "description": "Total price charged" },
+        "paymentStatus": { "type": "string", "enum": ["SUCCESS", "FAILED", "REFUNDED"] },
+        "bookingStatus": { "type": "string", "enum": ["CONFIRMED", "COMPLETED", "CANCELLED"] },
+        "createdAt": { "type": "string", "description": "Timestamp ISO string" }
+      },
+      "required": ["bookingId", "userId", "busId", "source", "destination", "journeyDate", "seats", "totalAmount", "paymentStatus", "bookingStatus"]
+    },
+    "notifications": {
+      "title": "Notification",
+      "description": "User trip updates, payment receipts, and reminders",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Notification ID" },
+        "userId": { "type": "string", "description": "Recipient user ID" },
+        "title": { "type": "string", "description": "Short title" },
+        "message": { "type": "string", "description": "Body message" },
+        "timestamp": { "type": "string", "description": "ISO timestamp" },
+        "read": { "type": "boolean", "description": "Read state" },
+        "type": { "type": "string", "description": "Category: booking, payment, reminder, cancellation" }
+      },
+      "required": ["id", "title", "message", "timestamp", "read"]
+    }
+  }
+}
